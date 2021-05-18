@@ -1,6 +1,23 @@
 class Player {}
-class Sprite {}
-class Cotroller {}
+
+class Controller {
+	constructor () {
+		this.up = false
+		this.down = false;
+		this.right = false;
+		this.left = false;
+		this.isMoving = false;
+	}
+
+	reset() {
+		this.up = false
+		this.down = false;
+		this.right = false;
+		this.left = false;
+		this.isMoving = false;
+	}
+}
+
 class Game {}
 
 function Sprite(img){
@@ -31,7 +48,7 @@ function Sprite(img){
 						this.posY,	//Posição no eixo Y onde a imagem será exibida 
 						this.width,	//Largura da imagem a ser exibida 
 						this.height	//Altura da imagem a ser exibida 
-					);
+						);
 		this.animation();
 	}
 
@@ -69,6 +86,6 @@ function Sprite(img){
 			this.srcX = 0;
 			this.countAnim = 0;
 		}
-		console.log(this.countAnim)
+		
 	}
 }
