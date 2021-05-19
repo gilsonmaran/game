@@ -23,9 +23,19 @@ class Joystick {
 		this.down = false;
 		this.right = false;
 		this.left = false;
+	}	
+
+	pressDown(e) {
+		let key = e.keyCode;
+		console.log(key)
 	}
 
-	button(key) {
+	pressUp() {
+		this._reset()
+	}
+
+
+	_button(key) {
 		this._reset();
 
 		if(key == 37)
@@ -39,8 +49,29 @@ class Joystick {
 
 		if(key == 40)
 			this._down();
+	}
 
-		return this._move();
+	_left() {
+		this.left = true;
+	}
+
+	_up() {
+		this.up = true;
+	}
+
+	_right() {
+		this.right = true;
+	}
+
+	_down() {
+		this.down = true;
+	}
+
+	_reset() {
+		this.up = false
+		this.down = false;
+		this.right = false;
+		this.left = false;
 	}
 
 	_move() {
@@ -59,32 +90,6 @@ class Joystick {
 		return null;
 	}
 
-	_left() {
-		this._reset();
-		this.left = true;
-	}
-
-	_up() {
-		this._reset();
-		this.up = true;
-	}
-
-	_right() {
-		this._reset();
-		this.right = true;
-	}
-
-	_down() {
-		this._reset();
-		this.down = true;
-	}
-
-	_reset() {
-		this.up = false
-		this.down = false;
-		this.right = false;
-		this.left = false;
-	}
 }
 
 
@@ -162,12 +167,12 @@ function Sprite(img){
 }
 
 window.onload = function() {
-	//Constantes que armazenam o código de cada seta do teclado
-	var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
-
+	// var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
 	let joystick = new Joystick();
 
-	
+	document.addEventListener('keydown', keydownHandler, false);
+	document.addEventListener('keyup', keyupHandler, false);
+
 	var cnv = document.querySelector("canvas");
 	var	ctx = cnv.getContext("2d");
 	var spriteSheet = new Image();
@@ -175,12 +180,21 @@ window.onload = function() {
 	var zezim = new Sprite(spriteSheet);
 	var scene = new Image();
 	scene.src = "img/scene.png";
-	window.addEventListener("keydown",keydownHandler,false);
-	window.addEventListener("keyup",keyupHandler,false);
+
+
+	//Constantes que armazenam o código de cada seta do teclado
 	
-	function keydownHandler(e){
-		let button = joystick.button(e.keyCode);
-		console.log(button);
+
+	
+
+	
+
+	// window.addEventListener("keydown", keydownHandler, false);
+	// window.addEventListener("keyup", keyupHandler, false);
+
+	function keydownHandler(e) {
+		joystick.pressDown(e);
+		return
 
 		switch(e.keyCode){
 			case RIGHT:
@@ -211,6 +225,9 @@ window.onload = function() {
 	}
 	
 	function keyupHandler(e){
+		joystick.pressUp();
+		return
+
 		switch(e.keyCode){
 			case RIGHT:
 			zezim.moveRight = false;
@@ -226,7 +243,7 @@ window.onload = function() {
 			break;
 		}
 	}
-	
+
 	//Quano a imagem é carregada, o programa é iniciado
 	spriteSheet.onload = function(){
 		init();
