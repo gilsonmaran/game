@@ -1,31 +1,62 @@
-class Player {}
+class Player {
+
+	constructor() {
+		this.moveRight = false;
+		this.moveLeft = false;
+		this.moveUp = false;
+		this.moveDown = false;
+	}
+
+	moveRight() {
+		this.moveRight = true;
+		this.moveLeft = false;
+		this.moveUp = false;
+		this.moveDown = false;
+	}
+}
+class Animate {}
+class Game {}
 
 class Joystick {
 	constructor () {
-		this.keyLeft = 37;
-		this.keyUp = 38;
-		this.keyRigth = 39;
-		this.keyDown = 40;
-
 		this.up = false;
 		this.down = false;
 		this.right = false;
 		this.left = false;
-		this.isMoving = false;
 	}
 
 	button(key) {
-		if (this.keyRigth)
-			this._right();
+		this._reset();
 
-		if(this.keyLeft)
+		if(key == 37)
 			this._left();
 
-		if(this.keyUp)
+		if(key == 38)
 			this._up();
 
-		if(this.keyDown)
+		if (key == 39)
+			this._right();
+
+		if(key == 40)
 			this._down();
+
+		return this._move();
+	}
+
+	_move() {
+		if(this.right)
+			return 'right'
+
+		if(this.left)
+			return 'left'
+
+		if(this.up)
+			return 'up'
+
+		if(this.down)
+			return 'down'
+
+		return null;
 	}
 
 	_left() {
@@ -53,13 +84,9 @@ class Joystick {
 		this.down = false;
 		this.right = false;
 		this.left = false;
-		this.isMoving = false;
 	}
 }
 
-class Animate {}
-
-class Game {}
 
 function Sprite(img){
 	this.moveLeft = false;
@@ -137,6 +164,7 @@ function Sprite(img){
 window.onload = function() {
 	//Constantes que armazenam o código de cada seta do teclado
 	var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+
 	let joystick = new Joystick();
 
 	
@@ -151,6 +179,8 @@ window.onload = function() {
 	window.addEventListener("keyup",keyupHandler,false);
 	
 	function keydownHandler(e){
+		let button = joystick.button(e.keyCode);
+		console.log(button);
 
 		switch(e.keyCode){
 			case RIGHT:
