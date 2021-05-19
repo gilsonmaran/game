@@ -1,15 +1,54 @@
 class Player {}
 
-class Controller {
+class Joystick {
 	constructor () {
-		this.up = false
+		this.keyLeft = 37;
+		this.keyUp = 38;
+		this.keyRigth = 39;
+		this.keyDown = 40;
+
+		this.up = false;
 		this.down = false;
 		this.right = false;
 		this.left = false;
 		this.isMoving = false;
 	}
 
-	reset() {
+	button(key) {
+		if (this.keyRigth)
+			this._right();
+
+		if(this.keyLeft)
+			this._left();
+
+		if(this.keyUp)
+			this._up();
+
+		if(this.keyDown)
+			this._down();
+	}
+
+	_left() {
+		this._reset();
+		this.left = true;
+	}
+
+	_up() {
+		this._reset();
+		this.up = true;
+	}
+
+	_right() {
+		this._reset();
+		this.right = true;
+	}
+
+	_down() {
+		this._reset();
+		this.down = true;
+	}
+
+	_reset() {
 		this.up = false
 		this.down = false;
 		this.right = false;
@@ -98,7 +137,8 @@ function Sprite(img){
 window.onload = function() {
 	//Constantes que armazenam o código de cada seta do teclado
 	var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
-	
+	let joystick = new Joystick();
+
 	
 	var cnv = document.querySelector("canvas");
 	var	ctx = cnv.getContext("2d");
@@ -111,6 +151,7 @@ window.onload = function() {
 	window.addEventListener("keyup",keyupHandler,false);
 	
 	function keydownHandler(e){
+
 		switch(e.keyCode){
 			case RIGHT:
 			zezim.moveRight = true;
