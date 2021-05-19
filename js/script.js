@@ -1,4 +1,4 @@
-window.onload = function(){
+window.onload = function() {
 	//Constantes que armazenam o código de cada seta do teclado
 	var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
 	
@@ -15,28 +15,28 @@ window.onload = function(){
 	function keydownHandler(e){
 		switch(e.keyCode){
 			case RIGHT:
-				zezim.mvRight = true;
-				zezim.mvLeft = false;
-				zezim.mvUp = false;
-				zezim.mvDown = false;
+				zezim.moveRight = true;
+				zezim.moveLeft = false;
+				zezim.moveUp = false;
+				zezim.moveDown = false;
 				break;
 			case LEFT:
-				zezim.mvRight = false;
-				zezim.mvLeft = true;
-				zezim.mvUp = false;
-				zezim.mvDown = false;
+				zezim.moveRight = false;
+				zezim.moveLeft = true;
+				zezim.moveUp = false;
+				zezim.moveDown = false;
 				break;
 			case UP:
-				zezim.mvRight = false;
-				zezim.mvLeft = false;
-				zezim.mvUp = true;
-				zezim.mvDown = false;
+				zezim.moveRight = false;
+				zezim.moveLeft = false;
+				zezim.moveUp = true;
+				zezim.moveDown = false;
 				break;
 			case DOWN:
-				zezim.mvRight = false;
-				zezim.mvLeft = false;
-				zezim.mvUp = false;
-				zezim.mvDown = true;
+				zezim.moveRight = false;
+				zezim.moveLeft = false;
+				zezim.moveUp = false;
+				zezim.moveDown = true;
 				break;
 		}
 	}
@@ -44,16 +44,16 @@ window.onload = function(){
 	function keyupHandler(e){
 		switch(e.keyCode){
 			case RIGHT:
-				zezim.mvRight = false;
+				zezim.moveRight = false;
 				break;
 			case LEFT:
-				zezim.mvLeft = false;
+				zezim.moveLeft = false;
 				break;
 			case UP:
-				zezim.mvUp = false;
+				zezim.moveUp = false;
 				break;
 			case DOWN:
-				zezim.mvDown = false;
+				zezim.moveDown = false;
 				break;
 		}
 	}

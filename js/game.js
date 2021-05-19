@@ -21,8 +21,11 @@ class Controller {
 class Game {}
 
 function Sprite(img){
-	//Atributos ****************
-	this.mvLeft = this.mvUp = this.mvRight = this.mvDown = false;
+	this.moveLeft = false;
+	this.moveRight = false;
+	this.moveUp = false;
+	this.moveDown = false;
+	this.isMoving = false;
 	
 	//Origem para captura da imagem a ser exibida
 	this.srcX = this.srcY = 0;
@@ -53,20 +56,20 @@ function Sprite(img){
 	}
 
 	//Move a figura
-	this.move = function(){
-		if(this.mvRight){
+	this.move = function() {
+		if(this.moveRight) {
 			this.posX += this.speed;
 			this.srcY = this.height * 3; 
 		} else
-		if(this.mvLeft){
+		if(this.moveLeft){
 			this.posX -= this.speed;
 			this.srcY = this.height * 2; 
 		} else
-		if(this.mvUp){
+		if(this.moveUp){
 			this.posY -= this.speed;
 			this.srcY = this.height * 1; 
 		} else
-		if(this.mvDown){
+		if(this.moveDown){
 			this.posY += this.speed;
 			this.srcY = this.height * 0; 
 		}
@@ -74,7 +77,7 @@ function Sprite(img){
 	
 	//Anima a figura
 	this.animation = function(){
-		if(this.mvLeft || this.mvUp || this.mvRight || this.mvDown){
+		if(this.moveLeft || this.moveUp || this.moveRight || this.moveDown){
 			//Caso qualquer seta seja pressionada, o contador de animação é incrementado
 			this.countAnim++;
 			if(this.countAnim >= 40){
