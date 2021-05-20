@@ -76,7 +76,7 @@ window.onload = function(){
 	var	ctx = cnv.getContext("2d");
 	var spriteSheet = new Image();
 	spriteSheet.src = "img/img.png";
-	var zezim = new Sprite(spriteSheet);
+	var player = new Sprite(spriteSheet);
 	var scene = new Image();
 	scene.src = "img/scene.png";
 	window.addEventListener("keydown",keydownHandler,false);
@@ -84,50 +84,22 @@ window.onload = function(){
 	
 	function keydownHandler(e){
 		let press = joystick.pressDown(e);
-		movePlayer(press)
+		player.move(press)
 	}
 	
 	function keyupHandler(e){
 		// joystick.pressUp()
-		zezim.stop()
+		player.stop()
 	}
 	
 	function movePlayer(button) {
-		zezim.move(button);
-		return;
-
-		switch(button){
-			case 'right':
-			zezim.mvRight = true;
-			zezim.mvLeft = false;
-			zezim.mvUp = false;
-			zezim.mvDown = false;
-			break;
-			case 'left':
-			zezim.mvRight = false;
-			zezim.mvLeft = true;
-			zezim.mvUp = false;
-			zezim.mvDown = false;
-			break;
-			case 'up':
-			zezim.mvRight = false;
-			zezim.mvLeft = false;
-			zezim.mvUp = true;
-			zezim.mvDown = false;
-			break;
-			case 'down':
-			zezim.mvRight = false;
-			zezim.mvLeft = false;
-			zezim.mvUp = false;
-			zezim.mvDown = true;
-			break;
-		}
+		player.move(button);
 	}
 
 	//Quano a imagem é carregada, o programa é iniciado
 	spriteSheet.onload = function(){
 		init();
-		zezim.posX = zezim.posY = 150;
+		player.posX = player.posY = 150;
 	}
 
 	function init(){
@@ -135,13 +107,13 @@ window.onload = function(){
 	}
 
 	function update(){
-		zezim.move();
+		player.move();
 	}
 
 	function draw(){
 		ctx.clearRect(0,0,cnv.width,cnv.height);
 		ctx.drawImage(scene,0,0,scene.width,scene.height,0,0,scene.width,scene.height);
-		zezim.draw(ctx);
+		player.draw(ctx);
 	}
 
 	function loop(){
