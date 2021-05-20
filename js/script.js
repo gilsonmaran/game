@@ -89,10 +89,13 @@ window.onload = function(){
 	
 	function keyupHandler(e){
 		// joystick.pressUp()
-		stopPlayer()
+		zezim.stop()
 	}
 	
 	function movePlayer(button) {
+		zezim.move(button);
+		return;
+
 		switch(button){
 			case 'right':
 			zezim.mvRight = true;
@@ -121,12 +124,6 @@ window.onload = function(){
 		}
 	}
 
-	function stopPlayer() {
-		zezim.mvRight = false;
-		zezim.mvLeft = false;
-		zezim.mvUp = false;
-		zezim.mvDown = false;
-	}
 	//Quano a imagem é carregada, o programa é iniciado
 	spriteSheet.onload = function(){
 		init();

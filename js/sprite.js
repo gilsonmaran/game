@@ -1,6 +1,7 @@
-function Sprite(img){
+function Sprite(img) {
 	//Atributos ****************
-	this.mvLeft = this.mvUp = this.mvRight = this.mvDown = false;
+	// this.mvLeft = this.mvUp = this.mvRight = this.mvDown = false;
+	let isMoving = false;
 	
 	//Origem para captura da imagem a ser exibida
 	this.srcX = this.srcY = 0;
@@ -26,44 +27,57 @@ function Sprite(img){
 						this.posY,	//Posição no eixo Y onde a imagem será exibida 
 						this.width,	//Largura da imagem a ser exibida 
 						this.height	//Altura da imagem a ser exibida 
-					);
+						);
 		this.animation();
 	}
 
 	//Move a figura
-	this.move = function(){
-		if(this.mvRight){
+	this.move = function(button) {
+
+		if(button == 'right'){
+			this.isMoving = true;
 			this.posX += this.speed;
 			this.srcY = this.height * 3; 
 		} else
-		if(this.mvLeft){
+		if(button == 'left'){
+			this.isMoving = true;
 			this.posX -= this.speed;
 			this.srcY = this.height * 2; 
 		} else
-		if(this.mvUp){
+		if(button == 'up'){
+			this.isMoving = true;
 			this.posY -= this.speed;
 			this.srcY = this.height * 1; 
 		} else
-		if(this.mvDown){
+		if(button == 'down'){
+			this.isMoving = true;
 			this.posY += this.speed;
 			this.srcY = this.height * 0; 
-		}
+		} 
 	}
-	
-	//Anima a figura
-	this.animation = function(){
-		if(this.mvLeft || this.mvUp || this.mvRight || this.mvDown){
-			//Caso qualquer seta seja pressionada, o contador de animação é incrementado
-			this.countAnim++;
-			if(this.countAnim >= 40){
-				this.countAnim = 0;
-			}
-			this.srcX = Math.floor(this.countAnim / 5) * this.width;
-		} else {
-			//Caso nenhuma tecla seja pressionada, o contador de animação é zerado e a imagem do personagem parado é exibida
-			this.srcX = 0;
-			this.countAnim = 0;
-		}
+
+
+	this.stop = function() {
+		this.isMoving = false;
 		
+	}
+
+	//Anima a figura
+	this.animation = function() {
+		this.isMoving ? this.animate() : this.idle();
+	}
+
+	this.animate = function() {
+		this.countAnim++;
+
+		if(this.countAnim >= 40)
+			this.countAnim = 0;
+
+		this.srcX = Math.floor(this.countAnim / 5) * this.width;
+	}
+
+	this.idle = function() {
+		this.srcX = 0;
+		this.countAnim = 0;
 	}
 }
