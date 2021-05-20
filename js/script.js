@@ -67,10 +67,7 @@ class Joystick {
 }
 
 window.onload = function(){
-	//Constantes que armazenam o código de cada seta do teclado
 	let joystick = new Joystick();
-
-	var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
 	
 	var cnv = document.querySelector("canvas");
 	var	ctx = cnv.getContext("2d");
@@ -91,17 +88,10 @@ window.onload = function(){
 		player.stop()
 	}
 	
-	function movePlayer(button) {
-		player.move(button);
-	}
-
-	//Quano a imagem é carregada, o programa é iniciado
-	spriteSheet.onload = function(){
-		init();
-	}
-
-	function init(){
-		loop();
+	function loop(){
+		window.requestAnimationFrame(loop,cnv);
+		update();
+		draw();
 	}
 
 	function update(){
@@ -114,9 +104,8 @@ window.onload = function(){
 		player.draw(ctx);
 	}
 
-	function loop(){
-		window,requestAnimationFrame(loop,cnv);
-		update();
-		draw();
+	function start(){
+		loop();
 	}
+	start();
 }
