@@ -88,7 +88,6 @@ window.onload = function(){
 	}
 	
 	function keyupHandler(e){
-		// joystick.pressUp()
 		player.stop()
 	}
 	
@@ -99,7 +98,6 @@ window.onload = function(){
 	//Quano a imagem é carregada, o programa é iniciado
 	spriteSheet.onload = function(){
 		init();
-		player.posX = player.posY = 150;
 	}
 
 	function init(){

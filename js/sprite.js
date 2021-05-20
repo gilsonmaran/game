@@ -6,7 +6,7 @@ function Sprite(img) {
 	//Origem para captura da imagem a ser exibida
 	this.srcX = this.srcY = 0;
 	//Posição no canvas onde a figura será exibida
-	this.posX = this.posY = 0;
+	this.posX = this.posY = 150;
 	this.width = 24;
 	this.height = 32;
 	this.speed = 1;
