@@ -45,10 +45,10 @@ function Player(sprite) {
 
 	//Anima a figura
 	this.animation = function() {
-		this.isMoving ? this.animate() : this.idle();
+		this.isMoving ? this.walk() : this.idle();
 	}
 
-	this.animate = function() {
+	this.walk = function() {
 		this.contadorDaAnimacao++;
 
 		if(this.contadorDaAnimacao >= 40)
