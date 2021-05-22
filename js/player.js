@@ -1,17 +1,18 @@
-function Player(img) {
+function Player(sprite) {
 	this.isMoving = false;
 	
 	this.srcX = 0;
 	this.srcY = 0;
-	this.posX = this.posY = 150;
+	this.posX = 150;
+	this.posY = 150;
 	this.width = 24;
 	this.height = 32;
 	this.speed = 1;
-	this.img = img;
-	this.countAnim = 0;
+	this.sprite = sprite;
+	this.contadorDaAnimacao = 0;
 
 	this.draw = function(ctx) {
-		ctx.drawImage(this.img, 
+		ctx.drawImage(this.sprite, 
 			this.srcX, this.srcY, 
 			this.width, this.height, 
 			this.posX, this.posY,
@@ -48,17 +49,17 @@ function Player(img) {
 	}
 
 	this.animate = function() {
-		this.countAnim++;
+		this.contadorDaAnimacao++;
 
-		if(this.countAnim >= 40)
-			this.countAnim = 0;
+		if(this.contadorDaAnimacao >= 40)
+			this.contadorDaAnimacao = 0;
 
-		this.srcX = Math.floor(this.countAnim / 5) * this.width;
+		this.srcX = Math.floor(this.contadorDaAnimacao / 5) * this.width;
 	}
 
 	this.idle = function() {
 		this.isMoving = false;
 		this.srcX = 0;
-		this.countAnim = 0;
+		this.contadorDaAnimacao = 0;
 	}
 }
