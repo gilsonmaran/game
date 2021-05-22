@@ -18,18 +18,10 @@ class Joystick {
 	_button(key) {
 		this._default();
 
-		if(key == 37)
-			return this._left();
-
-		if(key == 38)
-			return this._up();
-
-		if (key == 39)
-			return this._right();
-
-		if(key == 40)
-			return this._down();
-
+		if(key == 37) return this._left();
+		if(key == 38) return this._up();
+		if(key == 39) return this._right();
+		if(key == 40) return this._down();
 		return null;
 	}
 
@@ -67,11 +59,9 @@ class Joystick {
 }
 
 window.onload = function() {
-	let joystick = new Joystick();
-	
 	let canvas = document.querySelector("canvas");
 	let	context = canvas.getContext("2d");
-
+	let joystick = new Joystick();
 	let sprite = new Image();
 	let scene = new Image();
 
