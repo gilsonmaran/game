@@ -1,67 +1,9 @@
-class Joystick {
-	constructor () {
-		this.up = false;
-		this.down = false;
-		this.right = false;
-		this.left = false;
-		this.isMoving = false;
-	}	
-
-	pressDown(e) {
-		return this._button(e.keyCode)
-	}
-
-	pressUp() {
-		this._default()
-	}
-
-	_button(key) {
-		this._default();
-
-		if(key == 37) return this._left();
-		if(key == 38) return this._up();
-		if(key == 39) return this._right();
-		if(key == 40) return this._down();
-		return null;
-	}
-
-	_left() {
-		this.isMoving = true;
-		this.left = true;
-		return 'left';
-	}
-
-	_up() {
-		this.isMoving = true;
-		this.up = true;
-		return 'up';
-	}
-
-	_right() {
-		this.isMoving = true;
-		this.right = true;
-		return 'right';
-	}
-
-	_down() {
-		this.isMoving = true;
-		this.down = true;
-		return 'down';
-	}
-
-	_default() {
-		this.up = false
-		this.down = false;
-		this.right = false;
-		this.left = false;
-		this.isMoving = false;
-	}
-}
 
 window.onload = function() {
 	let canvas = document.querySelector("canvas");
 	let	context = canvas.getContext("2d");
 	let joystick = new Joystick();
+	console.log(joystick)
 	let sprite = new Image();
 	let scene = new Image();
 
