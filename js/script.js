@@ -66,50 +66,57 @@ class Joystick {
 	}
 }
 
-window.onload = function(){
+window.onload = function() {
 	let joystick = new Joystick();
 	
 	let canvas = document.querySelector("canvas");
 	let	context = canvas.getContext("2d");
 
-	let spriteSheet = new Image();
+	let sprite = new Image();
 	let scene = new Image();
 
-	spriteSheet.src = "img/img.png";
+	sprite.src = "img/img.png";
 	scene.src = "img/scene.png";
 	
-	let player = new Sprite(spriteSheet);
+	let player = new Player(sprite);
 	
 	window.addEventListener("keydown", keydownHandler, false);
 	window.addEventListener("keyup", keyupHandler, false);
 	
-	function keydownHandler(e){
+	function keydownHandler(e) {
 		let press = joystick.pressDown(e);
 		player.move(press)
 	}
 	
-	function keyupHandler(e){
-		player.stop()
+	function keyupHandler(e) {
+		player.idle()
 	}
 	
-	function update(){
-		player.move();
+	function update() {
+		clearScene()
+		drawScene()
+		drawPlayer()
 	}
 
-	function draw(){
+	function clearScene() {
 		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+
+	function drawScene() {
 		context.drawImage(scene, 0, 0, scene.width, scene.height, 0, 0, scene.width, scene.height);
+	}
+
+	function drawPlayer() {
 		player.draw(context);
 	}
 
-	function loop(){
-		window.requestAnimationFrame(loop, canvas);
-		update();
-		draw();
+	function start() {
+		loop();
 	}
 
-	function start(){
-		loop();
+	function loop() {
+		window.requestAnimationFrame(loop, canvas);
+		update();
 	}
 
 	start();

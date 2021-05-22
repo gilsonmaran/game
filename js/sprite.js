@@ -1,11 +1,8 @@
-function Sprite(img) {
-	//Atributos ****************
-	// this.mvLeft = this.mvUp = this.mvRight = this.mvDown = false;
-	let isMoving = false;
+function Player(img) {
+	this.isMoving = false;
 	
-	//Origem para captura da imagem a ser exibida
-	this.srcX = this.srcY = 0;
-	//Posição no canvas onde a figura será exibida
+	this.srcX = 0;
+	this.srcY = 0;
 	this.posX = this.posY = 150;
 	this.width = 24;
 	this.height = 32;
@@ -13,27 +10,16 @@ function Sprite(img) {
 	this.img = img;
 	this.countAnim = 0;
 
-	//Métodos *****************
-	//Desenha a figura
-	this.draw = function(ctx){
-		ctx.drawImage(	this.img,	//Imagem de origem
-						//Captura da imagem
-						this.srcX,	//Origem da captura no eixo X
-						this.srcY,	//Origem da captura no eixo Y
-						this.width,	//Largura da imagem que será capturada
-						this.height,//Altura da imagem que será capturada
-						//Exibição da imagem
-						this.posX,	//Posição no eixo X onde a imagem será exibida 
-						this.posY,	//Posição no eixo Y onde a imagem será exibida 
-						this.width,	//Largura da imagem a ser exibida 
-						this.height	//Altura da imagem a ser exibida 
-						);
+	this.draw = function(ctx) {
+		ctx.drawImage(this.img, 
+			this.srcX, this.srcY, 
+			this.width, this.height, 
+			this.posX, this.posY,
+			this.width,	this.height);
 		this.animation();
 	}
 
-	//Move a figura
 	this.move = function(button) {
-
 		if(button == 'right'){
 			this.isMoving = true;
 			this.posX += this.speed;
@@ -56,12 +42,6 @@ function Sprite(img) {
 		} 
 	}
 
-
-	this.stop = function() {
-		this.isMoving = false;
-		
-	}
-
 	//Anima a figura
 	this.animation = function() {
 		this.isMoving ? this.animate() : this.idle();
@@ -77,6 +57,7 @@ function Sprite(img) {
 	}
 
 	this.idle = function() {
+		this.isMoving = false;
 		this.srcX = 0;
 		this.countAnim = 0;
 	}
